@@ -2,8 +2,7 @@ import jQuery from 'jquery';
 window.$ = jQuery;
 
 
-$('body').on('click', '#btn_logout', function(e) {
-    console.log('logout');
+$('body').on('click', '#btn_logout', (e) => {
     $.ajax({
         credentials: 'same-origin',
         headers: {
@@ -18,5 +17,9 @@ $('body').on('click', '#btn_logout', function(e) {
 
     })         
 
+})
+
+$('body').on('click', '#logo_navbar', (e) => {
+    $('.div_navbar').toggle();
 })
 

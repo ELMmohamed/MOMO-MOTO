@@ -2,21 +2,57 @@
 body{
     font-family: 'Times New Roman', Times, serif;
 }
+
 main{
     min-height: 92vh;
 }
+
 header{
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 12px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 8vh;
     background-color: black;
 }
-.logo{
-    width: 50px;
-    height: 50px;
+
+.logo {
+    width: 8%;
+    height: 8%;
     margin-right: 10px;
 }
 
+.a_box_title_logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+h1{
+    color: #004aad;
+}
+
+.div_logo_navbar{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.div_navbar {
+    background-color: white;
+    position: absolute;
+    align-items: center;
+    right: 6%;
+    top: 92%;
+    border: 1px solid;
+    border-radius: 6px;
+}
+.btn_navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 3vh;
+    color: #004aad;
+}
