@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         \App\Models\Admin::factory()->create([
-            'code' => 12032003,
+            'pin' => 12032003,
         ]);
     }
 }

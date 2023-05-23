@@ -17,7 +17,7 @@ class AdminFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => fake()->numberBetween(1, 10000000),
+            'pin' => fake()->numberBetween(1, 10000000),
         ];
     }
 }

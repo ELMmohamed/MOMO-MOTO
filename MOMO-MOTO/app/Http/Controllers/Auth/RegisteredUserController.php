@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'admin' => $request->admin == DB::table('admins')->first()->code ? 1 : 0     
+            'admin' => $request->admin == DB::table('admins')->first()->pin ? 1 : 0     
           ]);
 
         event(new Registered($user));

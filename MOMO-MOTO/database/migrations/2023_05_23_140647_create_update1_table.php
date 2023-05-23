@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->integer('pin')->unique();
-            $table->timestamps();
+        Schema::table('admins', function (Blueprint $table) {
+           $table->dropColumn('code');
+           $table->addColumn('integer','pin');
         });
+
     }
 
     /**
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('update1');
     }
 };
