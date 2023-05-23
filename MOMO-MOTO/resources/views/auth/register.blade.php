@@ -37,6 +37,11 @@
                     <error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
                 
+                <div class="mt-4">
+                    <label for="admin" :value="__('Admin')" />
+                    <input id="admin" class="block mt-1 w-full" type="text" name="admin" autofocus autocomplete="admin" />
+                    <error :messages="$errors->get('admin')" class="mt-2" />
+                </div>
                 <input type="submit" placeholder="S'inscrire">
             </form>
         </main>
