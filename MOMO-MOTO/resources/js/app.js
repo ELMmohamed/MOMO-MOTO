@@ -13,7 +13,7 @@ $.ajax({
         console.log(e);
         user = e;
         if (user.admin == 0) {
-
+            $(".admin").hide();
         }
     },
     error: (e) => {

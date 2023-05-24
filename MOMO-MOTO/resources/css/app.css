@@ -51,6 +51,7 @@ h1{
     align-items: center;
     right: 6%;
     top: 92%;
+    width: 15vw;
     border: 1px solid;
     border-radius: 6px;
 }
@@ -58,8 +59,13 @@ h1{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 10vw;
     color: #004aad;
     font-size: 1.5vw;
     cursor: pointer;
+    padding: 5px;
+}
+
+.btn_navbar:hover{
+    background-color: #004aad;
+    color: white;
 }

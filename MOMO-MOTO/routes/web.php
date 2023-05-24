@@ -26,5 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', function () { return view('layouts.home');})->name('home');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::get('/getuser', [FunctionsController::class, 'getUSer'])->name('getuser');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });
 
