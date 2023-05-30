@@ -1,33 +1,30 @@
 <!DOCTYPE html>
-    @include('layouts.head')
-    <body>
-        @include('layouts.header')
-        <main>
-            <form method="POST" action="{{ route('auth') }}">
+@include('layouts.head')
+
+<body>
+    @include('layouts.header')
+    <main>
+        <div class="div_form_auth">
+            <form class="form_auth" method="POST" action="{{ route('auth') }}">
+                <h1 class="title_div">Se connecter</h1>
                 @csrf
-                <!-- Email Address -->
                 <div>
-                    <label for="email" :value="__('Email')" />
-                    <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                    <input id="email" class="input_form_auth" type="email" name="email" placeholder="Email" required />
                     <error :messages="$errors->get('email')" class="mt-2" />
                 </div>
-
-                <!-- Password -->
                 <div class="mt-4">
-                    <label for="password" :value="__('Password')" />
-
-                    <input id="password" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password"
-                                    required autocomplete="current-password" />
-
+                    <input id="password" class="input_form_auth" type="password" name="password" placeholder="Mot de passe" required />
                     <error :messages="$errors->get('password')" class="mt-2" />
-                </div> 
+                </div>
                 <div>
-                    <input type="submit" placeholder="Se connecter">
-                    </div>         
+                    <input class="btn_form_auth" type="submit" value="Se connecter">
+                </div>
+                <div>
+                    <a class="link_form_auth" href="{{ route('register') }}">S'inscrire</a>
+                </div>
             </form>
-        </main>
-    </body>
+        </div>
+    </main>
+</body>
 
 </html>

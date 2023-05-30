@@ -1,49 +1,42 @@
 <!DOCTYPE html>
-    @include('layouts.head')
-    <body>
-        @include('layouts.header')
-        <main>
-            <form method="POST" action="{{ route('register') }}">
+@include('layouts.head')
+
+<body>
+    @include('layouts.header')
+    <main>
+        <div class="div_form_auth" style="height:60vh">
+            <form method="POST" class="form_auth" action="{{ route('register') }}">
+                <h1 class="title_dov">S'inscrire</h1>
                 @csrf
-                <!-- Name -->
-                <div class="">
-                    <label for="name" :value="__('Name')" />
-                    <input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <div>
+                    <input id="name" class="input_form_auth" type="text" name="name" placeholder="Nom" required />
                     <error :messages="$errors->get('name')" class="mt-2" />
                 </div>
-
-                <!-- Email Address -->
-                <div class="mt-4">
-                    <label for="email" :value="__('Email')" />
-                    <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <div>
+                    <input id="email" class="input_form_auth" type="email" name="email" placeholder="Email" required  />
                     <error :messages="$errors->get('email')" class="mt-2" />
                 </div>
-
-                <!-- Password -->
-                <div class="mt-4">
-                    <label for="password" :value="__('Password')" />
-
-                    <input id="password" class="block mt-1 w-full" type="password" name="password"
-                                    required autocomplete="new-password" />
-
+                <div>
+                    <input id="password" class="input_form_auth" type="password" name="password" placeholder="Mot de passe" required />
                     <error :messages="$errors->get('password')" class="mt-2" />
                 </div>
-
-                <!-- Confirm Password -->
-                <div class="mt-4">
-                    <label for="password_confirmation" :value="__('Confirm Password')" />
-                    <input id="password_confirmation" class="block mt-1 w-full" type="password"
-                                    name="password_confirmation" required autocomplete="new-password" />
+                <div>
+                    <input id="password_confirmation" class="input_form_auth" type="password" name="password_confirmation" placeholder="Confirmer le mot de passe" />
                     <error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
-                
-                <div class="mt-4">
-                    <label for="admin" :value="__('Admin')" />
-                    <input id="admin" class="block mt-1 w-full" type="text" name="admin" autofocus autocomplete="admin" />
+                <div>
+                    <input id="admin" class="input_form_auth" type="text" name="admin" placeholder="Code administrateur"/>
                     <error :messages="$errors->get('admin')" class="mt-2" />
                 </div>
-                <input type="submit" placeholder="S'inscrire">
+                <div>
+                    <input class="btn_form_auth" type="submit" value="S'inscrire">
+                </div>
+                <div>
+                    <a class="link_form_auth" href="{{ route('login') }}">Se connecter</a>
+                </div>
             </form>
-        </main>
-    </body>
+        </div>
+    </main>
+</body>
+
 </html>

@@ -1,11 +1,10 @@
-
-body{
+body {
     font-family: 'Times New Roman', Times, serif;
     background-image: url("/public/images/moto_backgroud.png");
     background-size: cover;
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +12,7 @@ main{
     height: auto;
 }
 
-header{
+header {
     padding: 10px 20px;
     border-radius: 12px;
     display: flex;
@@ -23,29 +22,35 @@ header{
     background-color: black;
 }
 
+a {
+    text-decoration: none;
+    color: #004aad;
+}
+
 .logo {
     width: 8%;
     height: 8%;
     margin-right: 10px;
 }
 
-.a_box_title_logo{
+.a_box_title_logo {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
 
-h1{
+h1 {
     color: #004aad;
 }
 
-.div_logo_navbar{
+.div_logo_navbar {
     position: relative;
     display: flex;
     align-items: center;
 }
 
 .div_navbar {
+    display: none;
     background-color: white;
     position: absolute;
     align-items: center;
@@ -55,7 +60,8 @@ h1{
     border: 1px solid;
     border-radius: 6px;
 }
-.btn_navbar{
+
+.btn_navbar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +71,80 @@ h1{
     padding: 5px;
 }
 
-.btn_navbar:hover{
+.btn_navbar:hover {
     background-color: #004aad;
     color: white;
+}
+
+.div_info_profile,
+.div_form_profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    height: 40vh;
+    background-color: black;
+    border-radius: 12px;
+    margin-top: 10vh;
+}
+.div_form_auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    height: 40vh;
+    background-color: black;
+    border-radius: 12px;
+    margin-top: 10vh;
+}
+
+.form_auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    background-color: black;
+    border-radius: 12px;
+}
+
+.input_form_auth {
+    padding: 0px 20px;
+    width: 20vw;
+    height: 5vh;
+    margin: 10px;
+    border-radius: 6px;
+    border: 1px solid;
+}
+
+.title_div {
+    margin-top: 10px;
+    font-size: 2vw;
+}
+
+.btn_form_auth {
+    width: 10vw;
+    height: 5vh;
+    margin: 10px;
+    border-radius: 6px;
+    border: 1px solid;
+    background-color: #004aad;
+    color: black;
+    font-size: 1.5vw;
+    cursor: pointer;
+}
+
+.link_form_auth {
+    margin-top: 10px;
+    font-size: 1.5vw;
+    margin-left: 10px;
+    padding-left: 250px;
+    text-decoration: underline;
+}
+
+.box_info_profile label {
+    color: white;
+    font-size: 1.5vw;
 }

@@ -9,7 +9,7 @@
             <div class="div_navbar">
                 <div class="btn_navbar" id='btn_logout'>Se déconnecter</div>
                 <div class="btn_navbar admin" id="btn_add_product">Ajout d'un produit</div>
-                <div class="btn_navbar" id="btn_page_profile">Mon profil</div>
+                <div class="btn_navbar" id="btn_page_profile" >Mon profil</div>
             </div>
         </div>
     @endif
