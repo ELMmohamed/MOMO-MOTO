@@ -1,14 +1,11 @@
 import jQuery from 'jquery';
-import { validate } from 'node-forge/lib/asn1';
 window.$ = jQuery;
 
 var user;
 
-if (location.pathname != '/login'&& location.pathname != '/register') {
-    init();
-}
+console.log(location.pathname);
 
-init = () => {
+function init() {
     $.ajax({
         credentials: 'same-origin',
         headers: {
@@ -28,12 +25,16 @@ init = () => {
         }
     })
     if (location.pathname == '/profile') {
-       $(".box_info_profile").add(
+        $(".box_info_profile").add(
             $("#profile_name").text(user.name),
             $("#profile_email").text(user.email),
-            
-       )
+
+        )
     }
+}
+
+if (location.pathname != '/login' && location.pathname != '/register') {
+    init();
 }
 
 $('body').on('click', '#btn_logout', (e) => {
