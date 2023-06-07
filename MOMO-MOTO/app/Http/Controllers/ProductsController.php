@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function get_addproduct()
     {
-        return view('products');
+        return view('layouts.addproduct');
     }
 
     public function store(Request $request)

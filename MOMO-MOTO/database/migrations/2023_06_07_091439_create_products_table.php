@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-           $table->addColumn('integer','phone')->unique()->nullable();
-           $table->addColumn('text','description')->nullable();
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
-
     }
 
     /**
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('update1');
+        Schema::dropIfExists('products');
     }
 };

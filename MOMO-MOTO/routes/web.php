@@ -3,9 +3,10 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\FunctionsController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\Adminstration;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', function () { return view('layouts.home');})->name('home');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::get('/getuser', [FunctionsController::class, 'getUSer'])->name('getuser');
-    Route::get('/profile', function () { return view('layouts.profile');})->name('profile'); 
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile'); 
+    Route::post('/updateuser', [ProfileController::class, 'update'])->name('updateuser');
+    Route::get('/addproduct', [ProductsController::class, 'get_addproduct'])->name('get_addproduct')->middleware(Adminstration::class);
+    Route::post('/addproduct', [ProductsController::class, 'store'])->name('addproduct');
+    
+    // Route::get('/addproduct', [ProductsController::class, 'get_addproduct'])->name('get_addproduct');
 });
 

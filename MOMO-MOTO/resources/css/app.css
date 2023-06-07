@@ -2,6 +2,7 @@ body {
     font-family: 'Times New Roman', Times, serif;
     background-image: url("/public/images/moto_backgroud.png");
     background-size: cover;
+    background-attachment: fixed;
 }
 
 main {
@@ -42,6 +43,11 @@ a {
 h1 {
     color: #004aad;
 }
+.div_flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .div_logo_navbar {
     position: relative;
@@ -77,7 +83,7 @@ h1 {
 }
 
 .div_info_profile,
-.div_form_profile {
+.div_edit_profile {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,7 +115,7 @@ h1 {
     background-color: black;
     border-radius: 12px;
 }
-
+.input_form_edit_profile,
 .input_form_auth {
     padding: 0px 20px;
     width: 20vw;
@@ -123,9 +129,11 @@ h1 {
     margin-top: 10px;
     font-size: 2vw;
 }
-
+.btn_form_edit_profile,
+.btn_show_edit_profile,
 .btn_form_auth {
-    width: 10vw;
+    text-align: center;
+    min-width: 10vw;
     height: 5vh;
     margin: 10px;
     border-radius: 6px;

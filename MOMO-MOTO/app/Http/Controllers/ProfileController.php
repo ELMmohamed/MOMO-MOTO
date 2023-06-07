@@ -1,27 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
     public function index(): View
     {
-        return view('profile');
+        return view('layouts.profile');
     }
 
-    // public function update(ProfileUpdateRequest $request): RedirectResponse
-    // {
-    //     $user = Auth::user();
-    //     $user->update($request->validated());
+    public function update(Request $request){
 
-    //     return Redirect::route('profile.index');
-    // }
+        DB::table('users')->where('id', Auth::user()->id)->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address'=> $request->address,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+    }
    
 }
