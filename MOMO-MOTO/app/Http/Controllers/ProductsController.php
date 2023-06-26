@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Product;
 class ProductsController extends Controller
 {
     public function get_addproduct()
@@ -13,9 +13,12 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required'
+        Product::create([
+            'mark' => $request->mark,
+            'model' => $request->model,
+            'price' => $request->price,
+            'year' => $request->year,
+            'milestone' => $request->milestone,
         ]);
     }
 }

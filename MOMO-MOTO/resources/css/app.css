@@ -82,6 +82,10 @@ h1 {
     color: white;
 }
 
+.div_home,
+.div_allproducts,
+.div_addproduct,
+.div_form_auth,
 .div_info_profile,
 .div_edit_profile {
     display: flex;
@@ -94,17 +98,8 @@ h1 {
     border-radius: 12px;
     margin-top: 10vh;
 }
-.div_form_auth {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 30vw;
-    height: 40vh;
-    background-color: black;
-    border-radius: 12px;
-    margin-top: 10vh;
-}
+
+
 
 .form_auth {
     display: flex;
@@ -115,6 +110,8 @@ h1 {
     background-color: black;
     border-radius: 12px;
 }
+
+.input_form_addproduct,
 .input_form_edit_profile,
 .input_form_auth {
     padding: 0px 20px;
@@ -129,6 +126,7 @@ h1 {
     margin-top: 10px;
     font-size: 2vw;
 }
+.btn_form_addproduct,
 .btn_form_edit_profile,
 .btn_show_edit_profile,
 .btn_form_auth {

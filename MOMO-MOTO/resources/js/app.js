@@ -1,5 +1,4 @@
 import jQuery from 'jquery';
-import { log } from 'neo-async';
 window.$ = jQuery;
 
 var user,
@@ -29,7 +28,7 @@ function init() {
     
 }
 
-if (url != '/login' && url != '/register') {
+if (url != '' && url != '/register') {
     init();
 }
 
@@ -65,6 +64,8 @@ $('body').on('click', '#btn_page_profile', (e) => { location.href = '/profile'; 
 $('body').on('click', '#btn_page_home', (e) => { location.href = '/home'; })
 $('body').on('click', '#btn_page_addproduct', (e) => { location.href = '/addproduct'; })
 $('body').on('click', '.btn_show_edit_profile', (e) => { $(".div_info_profile").hide(); $(".div_edit_profile").show();})
+$('body').on('click', '.input_img_form_addproduct', (e) => {$(e.currentTarget).val()})
+
 $('body').on('click', '.btn_form_edit_profile', (e) => {
 
     if (!validateForm('#form_edit_profile')) {
@@ -105,6 +106,40 @@ $('body').on('click', '.btn_form_edit_profile', (e) => {
     })
 })
             
+$('body').on('click', '.btn_form_addproduct', (e) => {
+
+    if (!validateForm('#form_addproduct')) {
+        alert('Veuillez remplir tous les champs');
+        return;
+    }
+
+    var product = {
+        mark: $("#input_mark_addproduct").val(),
+        model: $("#input_model_addproduct").val(),
+        price: $("#input_price_addproduct").val(),
+        year: $("#input_year_addproduct").val(),
+        milestone: $("#input_milestone_addproduct").val(),
+        img: $("#input_img_addproduct").val()
+    }
+
+    console.log(product);
+    $.ajax({
+        credentials: 'same-origin',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/addproduct',
+        method: 'POST',
+        data: product,
+        success: (e) => {
+            console.log(e);
+            location.href = '/home';
+        },
+        error: (e) => {
+            console.log(e);
+        }
+    })
+});
 
 function complete_profile(user) {
     $("#profile_name").html(user.name)
@@ -119,5 +154,7 @@ function complete_profile(user) {
     $("#edit_password").val('');
     $("#edit_password_confirmation").val('');
 }
+
+
 
 
