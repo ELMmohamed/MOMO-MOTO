@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/updateuser', [ProfileController::class, 'update'])->name('updateuser');
     Route::get('/addproduct', [ProductsController::class, 'get_addproduct'])->name('get_addproduct')->middleware(Adminstration::class);
     Route::post('/addproduct', [ProductsController::class, 'store'])->name('addproduct');
+    Route::get('/getproducts', [ProductsController::class, 'get_products'])->name('getproducts');
     
     // Route::get('/addproduct', [ProductsController::class, 'get_addproduct'])->name('get_addproduct');
 });

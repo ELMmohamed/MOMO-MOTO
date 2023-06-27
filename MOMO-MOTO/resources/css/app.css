@@ -23,6 +23,20 @@ header {
     background-color: black;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #004aad;
+    border-radius: 10px;
+}
+
 a {
     text-decoration: none;
     color: #004aad;
@@ -43,7 +57,8 @@ a {
 h1 {
     color: #004aad;
 }
-.div_flex{
+
+.div_flex {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +98,6 @@ h1 {
 }
 
 .div_home,
-.div_allproducts,
 .div_addproduct,
 .div_form_auth,
 .div_info_profile,
@@ -99,7 +113,29 @@ h1 {
     margin-top: 10vh;
 }
 
+.div_products {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+    width: 80vw;
+    height: 40vh;
+    background-color: black;
+    border-radius: 12px;
+    overflow: auto;
+}
 
+.div_product {
+    display: flex;
+    border: #004aad 1px solid;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 92%;
+    background-color: black;
+    border-radius: 12px;
+    margin: 10px;
+}
 
 .form_auth {
     display: flex;
@@ -126,6 +162,8 @@ h1 {
     margin-top: 10px;
     font-size: 2vw;
 }
+.btn_addcart_product,
+.btn_see_product,
 .btn_form_addproduct,
 .btn_form_edit_profile,
 .btn_show_edit_profile,
@@ -142,6 +180,17 @@ h1 {
     cursor: pointer;
 }
 
+.btn_addcart_product,
+.btn_see_product{
+    background-color: #004aad;
+    font-size: 1vw;
+}
+
+.btn_addcart_product:hover,
+.btn_see_product:hover {
+    color: white;
+}
+
 .link_form_auth {
     margin-top: 10px;
     font-size: 1.5vw;
@@ -153,4 +202,16 @@ h1 {
 .box_info_profile label {
     color: white;
     font-size: 1.5vw;
+}
+
+
+
+.div_product label {
+    color: white;
+    font-size: 1vw;
+}
+
+.div_product img {
+    width: 12vw;
+    border-radius: 12px;
 }

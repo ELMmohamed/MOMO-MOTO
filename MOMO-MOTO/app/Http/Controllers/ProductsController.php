@@ -21,4 +21,10 @@ class ProductsController extends Controller
             'milestone' => $request->milestone,
         ]);
     }
+
+    public function get_products()
+    {
+        $products = Product::all();
+        return $products;
+    }
 }
