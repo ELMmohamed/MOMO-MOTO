@@ -1,9 +1,9 @@
 import jQuery from 'jquery';
-import { log } from 'util';
 window.$ = jQuery;
 
 var user,
-    url = location.pathname.slice(-1) == '/' ? location.pathname.slice(0, -1) : location.pathname;
+    url = location.pathname.slice(-1) == '/' ? location.pathname.slice(0, -1) : location.pathname,
+    products;
 
 console.log(url);
 
@@ -27,39 +27,40 @@ function init() {
             console.log(e);
         }
     })
+    if (url == '/home') {
+        $.ajax({
+            credentials: 'same-origin',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/getproducts',
+            method: 'GET',
+            success: (e) => {
+                console.log(e);
+                products = e;
+                $.each(e, (key, val) => {
+                    $(".box_products").append(
+                        $('<div/>').attr({ "class": 'box_product', "id": "product_" + val.id }).append(
+                            $('<img>').addClass('img_product').attr('src', "images/moto.png"),
+                            $('<div/>').addClass('box_info_product').append($('<label>').addClass('label_info_product').html(val.mark + ' ' + val.model)),
+                            $('<div/>').addClass('box_info_product').append($('<label>').addClass('span_info_product').html(val.price + ' €')),
+                            $('<div/>').addClass('box_info_product').append($('<button>').addClass('btn_addcart_product').html("Ajouter au panier")),
+                            $('<div/>').addClass('box_info_product').append($('<button>').addClass('btn_see_product').html('Voir la moto')),
+                        )
+                    )
+                })
+            },
+            error: (e) => {
+                console.log(e);
+            }
+        })
+    }
 }
 
 if (url != '' && url != '/register')
     init();
 
-if (url == '/home') {
-    $.ajax({
-        credentials: 'same-origin',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: '/getproducts',
-        method: 'GET',
-        success: (e) => {
-            console.log(e);
-            $.each(e, (key, val) => {
-                $(".div_products").append(
-                    $('<div/>').addClass('div_product').append(
-                        $('<img>').addClass('img_product').attr('src', "images/moto.png"),
-                        $('<div/>').addClass('div_info_product').append($('<label>').addClass('label_info_product').html(val.mark + ' ' + val.model)),
-                        $('<div/>').addClass('div_info_product').append($('<label>').addClass('span_info_product').html(val.price + ' €')),
-                        $('<div/>').addClass('div_info_product').append($('<button>').addClass('btn_addcart_product').html("Ajouter au panier")),
-                        $('<div/>').addClass('div_info_product').append( $('<button>').addClass('btn_see_product').html('Voir la moto') )
-                    )
-                )
 
-            })
-        },
-        error: (e) => {
-            console.log(e);
-        }
-    })
-}
 
 
 $('body').on('click', '#btn_logout', (e) => {
@@ -88,6 +89,21 @@ function validateForm(form) {
     })
     return valid;
 }
+
+function complete_profile(user) {
+    $("#profile_name").html(user.name)
+    $("#profile_email").html(user.email)
+    $("#profile_phone").html(user.phone ? user.phone : 'Non renseigné')
+    $("#profile_address").html(user.address ? user.address : 'Non renseigné')
+    $("#profile_admin").html(user.admin == 1 ? 'Administrateur' : 'Client');
+    $("#edit_name").val(user.name);
+    $("#edit_email").val(user.email);
+    $("#edit_phone").val(user.phone);
+    $("#edit_address").val(user.address);
+    $("#edit_password").val('');
+    $("#edit_password_confirmation").val('');
+}
+
 
 $('body').on('click', '#logo_navbar', (e) => { $('.div_navbar').toggle(); })
 $('body').on('click', '#btn_page_profile', (e) => { location.href = '/profile'; })
@@ -149,7 +165,7 @@ $('body').on('click', '.btn_form_addproduct', (e) => {
         price: $("#input_price_addproduct").val(),
         year: $("#input_year_addproduct").val(),
         milestone: $("#input_milestone_addproduct").val(),
-        img: $("#input_img_addproduct").val()
+        description: $("#input_description_addproduct").val(),
     }
 
     console.log(product);
@@ -171,20 +187,17 @@ $('body').on('click', '.btn_form_addproduct', (e) => {
     })
 });
 
-function complete_profile(user) {
-    $("#profile_name").html(user.name)
-    $("#profile_email").html(user.email)
-    $("#profile_phone").html(user.phone ? user.phone : 'Non renseigné')
-    $("#profile_address").html(user.address ? user.address : 'Non renseigné')
-    $("#profile_admin").html(user.admin == 1 ? 'Administrateur' : 'Client');
-    $("#edit_name").val(user.name);
-    $("#edit_email").val(user.email);
-    $("#edit_phone").val(user.phone);
-    $("#edit_address").val(user.address);
-    $("#edit_password").val('');
-    $("#edit_password_confirmation").val('');
-}
+$('body').on('click', '.btn_see_product', (e) => {
+    $(".div_home").hide();
+    $(".div_product").show();
 
+    var id = $(e.currentTarget).parent().parent().attr('id').split('_')[1];
 
-
+    $("#mark_product").html("Marque: " +products[id].mark);
+    $("#model_product").html("Modèle: " +products[id].model);
+    $("#price_product").html("Prix: " + products[id].price + ' €');
+    $("#year_product").html("Année: " +products[id].year);
+    $("#milestone_product").html("Kilomètrage: " +products[id].milestone + ' km');
+    $("#description_product").html("Description: " +products[id].description);      
+})
 

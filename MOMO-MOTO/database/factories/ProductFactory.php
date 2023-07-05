@@ -22,7 +22,8 @@ class ProductFactory extends Factory
             'model' => $this->faker->word,
             'price' => $this->faker->numberBetween(1000, 30000),
             'year' => $this->faker->numberBetween(1990, 2023),
-            'milestone' => $this->faker->numberBetween(0, 60000)
+            'milestone' => $this->faker->numberBetween(0, 60000),
+            'description' => $this->faker->text,
         ];
     }
 }

@@ -17,6 +17,8 @@
                 <br>
                 <input id="input_milestone_addproduct" class="input_form_addproduct" type="number" placeholder="Le kilométrage" />
                 <br>
+                <input id="input_description_addproduct" class="input_form_addproduct" type="text" placeholder="la description" />
+                <br>
                 <div class="div_flex"> 
                    <input class="btn_form_addproduct" type="button" value="Ajouter">
                 </div>

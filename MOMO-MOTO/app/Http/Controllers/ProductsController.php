@@ -19,6 +19,7 @@ class ProductsController extends Controller
             'price' => $request->price,
             'year' => $request->year,
             'milestone' => $request->milestone,
+            'description' => $request->description,
         ]);
     }
 

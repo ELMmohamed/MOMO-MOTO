@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('price');
             $table->string('year');
             $table->string('milestone');
+            $table->text('description');
             $table->timestamps();
         });
     }
