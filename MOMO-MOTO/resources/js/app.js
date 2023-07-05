@@ -110,6 +110,7 @@ $('body').on('click', '#btn_page_profile', (e) => { location.href = '/profile'; 
 $('body').on('click', '#btn_page_home', (e) => { location.href = '/home'; })
 $('body').on('click', '#btn_page_addproduct', (e) => { location.href = '/addproduct'; })
 $('body').on('click', '.btn_show_edit_profile', (e) => { $(".div_info_profile").hide(); $(".div_edit_profile").show(); })
+$('body').on('click', '#arrow_back', (e)=> { $(".div_home").show(); $(".div_product").hide(); })
 $('body').on('click', '.input_img_form_addproduct', (e) => { $(e.currentTarget).val() })
 
 $('body').on('click', '.btn_form_edit_profile', (e) => {
@@ -192,12 +193,16 @@ $('body').on('click', '.btn_see_product', (e) => {
     $(".div_product").show();
 
     var id = $(e.currentTarget).parent().parent().attr('id').split('_')[1];
+    $.each(products, (key, val) => {
+        if (val.id == id) {
+            $("#mark_product").html("Marque: " + val.mark);
+            $("#model_product").html("Modèle: " + val.model);
+            $("#price_product").html("Prix: " + val.price + ' €');
+            $("#year_product").html("Année: " + val.year);
+            $("#milestone_product").html("Kilomètrage: " + val.milestone + ' km');
+            $("#description_product").html("Description: " + val.description);
+        }
+    })
 
-    $("#mark_product").html("Marque: " +products[id].mark);
-    $("#model_product").html("Modèle: " +products[id].model);
-    $("#price_product").html("Prix: " + products[id].price + ' €');
-    $("#year_product").html("Année: " +products[id].year);
-    $("#milestone_product").html("Kilomètrage: " +products[id].milestone + ' km');
-    $("#description_product").html("Description: " +products[id].description);      
 })
 

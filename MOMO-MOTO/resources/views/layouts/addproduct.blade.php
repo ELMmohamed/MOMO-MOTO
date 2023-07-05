@@ -6,7 +6,7 @@
     <main>
         <div class="div_addproduct" style="width: 35vw;height: 60vh;">
             <form id="form_addproduct">
-                <h1 class="title_div"> Ajouter un produit</h1>
+                <h1 class="title_div" style=" text-align: center;"> Ajouter un produit</h1>
                 <input id="input_mark_addproduct" class="input_form_addproduct" type="text" placeholder="La marque" />
                 <br>
                 <input id="input_model_addproduct" class="input_form_addproduct" type="text" placeholder="le modèle" />
@@ -19,8 +19,8 @@
                 <br>
                 <input id="input_description_addproduct" class="input_form_addproduct" type="text" placeholder="la description" />
                 <br>
-                <div class="div_flex"> 
-                   <input class="btn_form_addproduct" type="button" value="Ajouter">
+                <div class="div_flex">
+                    <input class="btn_form_addproduct" type="button" value="Ajouter">
                 </div>
             </form>
         </div>
