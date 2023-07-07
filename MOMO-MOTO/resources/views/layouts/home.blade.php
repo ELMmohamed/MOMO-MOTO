@@ -26,7 +26,7 @@
             </div>
             <p id="description_product"></p>
             <div class="div_flex">
-                <input class="btn_addcart_product" type="button" value="Ajouter au panier">
+                <input class="btn_addcart_product"  type="button" value="Ajouter au panier">
             </div>
         </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -45,6 +46,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'admin' => $request->admin == DB::table('admins')->first()->pin ? 1 : 0     
           ]);
+
+        Cart::create([
+            'user_id' => $user->id,
+            'products_id' => 0,
+            'quantity' => 0,
+            'total_price' => 0
+        ]);
 
         event(new Registered($user));
 

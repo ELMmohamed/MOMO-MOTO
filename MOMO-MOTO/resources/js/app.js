@@ -1,12 +1,15 @@
 import jQuery from 'jquery';
+import { log } from 'neo-async';
 window.$ = jQuery;
 
 var user,
     url = location.pathname.slice(-1) == '/' ? location.pathname.slice(0, -1) : location.pathname,
-    products;
+    products,
+    cart ;
 
 console.log(url);
 
+// init function
 function init() {
     $.ajax({
         credentials: 'same-origin',
@@ -27,42 +30,89 @@ function init() {
             console.log(e);
         }
     })
-    if (url == '/home') {
-        $.ajax({
-            credentials: 'same-origin',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: '/getproducts',
-            method: 'GET',
-            success: (e) => {
-                console.log(e);
-                products = e;
-                $.each(e, (key, val) => {
-                    $(".box_products").append(
-                        $('<div/>').attr({ "class": 'box_product', "id": "product_" + val.id }).append(
-                            $('<img>').addClass('img_product').attr('src', "images/moto.png"),
-                            $('<div/>').addClass('box_info_product').append($('<label>').addClass('label_info_product').html(val.mark + ' ' + val.model)),
-                            $('<div/>').addClass('box_info_product').append($('<label>').addClass('span_info_product').html(val.price + ' €')),
-                            $('<div/>').addClass('box_info_product').append($('<button>').addClass('btn_addcart_product').html("Ajouter au panier")),
-                            $('<div/>').addClass('box_info_product').append($('<button>').addClass('btn_see_product').html('Voir la moto')),
-                        )
+    $.ajax({
+        credentials: 'same-origin',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/getcart',
+        method: 'GET',
+        success: (e) => {
+            cart = e[0];
+            console.log(cart);
+        },
+        error: (e) => {
+            console.log(e);
+        }
+    })
+
+    $.ajax({
+        credentials: 'same-origin',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/getproducts',
+        method: 'GET',
+        success: (e) => {
+            console.log(e);
+            products = e;
+            $.each(e, (key, val) => {
+                $(".box_products").append(
+                    $('<div/>').attr({ "class": 'box_product', "id": "product_" + val.id }).append(
+                        $('<img>').addClass('img_product').attr('src', "images/moto.png"),
+                        $('<div/>').addClass('box_info_product').append($('<label>').addClass('label_info_product').html(val.mark + ' ' + val.model)),
+                        $('<div/>').addClass('box_info_product').append($('<label>').addClass('span_info_product').html(val.price + ' €')),
+                        $('<div/>').addClass('box_info_product').append($('<input>').attr({'class':'btn_addcart_product','id_product':val.id,'type':'button', 'value':'Ajouter au panier'})),
+                        $('<div/>').addClass('box_info_product').append($('<input>').attr({'class':'btn_see_product','type':'button', 'value':'Voir la moto'})),
                     )
-                })
-            },
-            error: (e) => {
-                console.log(e);
-            }
-        })
-    }
+                )
+            })
+        },
+        error: (e) => {
+            console.log(e);
+        }
+    })
 }
 
 if (url != '' && url != '/register')
     init();
 
+// validate form function
+function validateForm(form) {
+    var inputs = $(form).find('input');
+    var valid = true;
+    inputs.each((i, e) => {
+        if ($(e).val() == '')
+            valid = false;
+    })
+    return valid;
+}
+
+// complete profile function
+function complete_profile(user) {
+    $("#profile_name").html(user.name)
+    $("#profile_email").html(user.email)
+    $("#profile_phone").html(user.phone ? user.phone : 'Non renseigné')
+    $("#profile_address").html(user.address ? user.address : 'Non renseigné')
+    $("#profile_admin").html(user.admin == 1 ? 'Administrateur' : 'Client');
+    $("#edit_name").val(user.name);
+    $("#edit_email").val(user.email);
+    $("#edit_phone").val(user.phone);
+    $("#edit_address").val(user.address);
+    $("#edit_password").val('');
+    $("#edit_password_confirmation").val('');
+}
 
 
+//click events
 
+$('body').on('click', '#logo_navbar', (e) => { $('.div_navbar').toggle(); })
+$('body').on('click', '#btn_page_profile', (e) => { location.href = '/profile'; })
+$('body').on('click', '#btn_page_home', (e) => { location.href = '/home'; })
+$('body').on('click', '#btn_page_addproduct', (e) => { location.href = '/addproduct'; })
+$('body').on('click', '.btn_show_edit_profile', (e) => { $(".div_info_profile").hide(); $(".div_edit_profile").show(); })
+$('body').on('click', '#arrow_back', (e)=> { $(".div_home").show(); $(".div_product").hide(); })
+$('body').on('click', '.input_img_form_addproduct', (e) => { $(e.currentTarget).val() })
 $('body').on('click', '#btn_logout', (e) => {
     $.ajax({
         credentials: 'same-origin',
@@ -79,40 +129,6 @@ $('body').on('click', '#btn_logout', (e) => {
     })
 
 })
-
-function validateForm(form) {
-    var inputs = $(form).find('input');
-    var valid = true;
-    inputs.each((i, e) => {
-        if ($(e).val() == '')
-            valid = false;
-    })
-    return valid;
-}
-
-function complete_profile(user) {
-    $("#profile_name").html(user.name)
-    $("#profile_email").html(user.email)
-    $("#profile_phone").html(user.phone ? user.phone : 'Non renseigné')
-    $("#profile_address").html(user.address ? user.address : 'Non renseigné')
-    $("#profile_admin").html(user.admin == 1 ? 'Administrateur' : 'Client');
-    $("#edit_name").val(user.name);
-    $("#edit_email").val(user.email);
-    $("#edit_phone").val(user.phone);
-    $("#edit_address").val(user.address);
-    $("#edit_password").val('');
-    $("#edit_password_confirmation").val('');
-}
-
-
-$('body').on('click', '#logo_navbar', (e) => { $('.div_navbar').toggle(); })
-$('body').on('click', '#btn_page_profile', (e) => { location.href = '/profile'; })
-$('body').on('click', '#btn_page_home', (e) => { location.href = '/home'; })
-$('body').on('click', '#btn_page_addproduct', (e) => { location.href = '/addproduct'; })
-$('body').on('click', '.btn_show_edit_profile', (e) => { $(".div_info_profile").hide(); $(".div_edit_profile").show(); })
-$('body').on('click', '#arrow_back', (e)=> { $(".div_home").show(); $(".div_product").hide(); })
-$('body').on('click', '.input_img_form_addproduct', (e) => { $(e.currentTarget).val() })
-
 $('body').on('click', '.btn_form_edit_profile', (e) => {
 
     if (!validateForm('#form_edit_profile')) {
@@ -152,6 +168,25 @@ $('body').on('click', '.btn_form_edit_profile', (e) => {
 
     })
 })
+$('body').on('click', '.btn_delete_profile', (e) => {
+
+    $.ajax({
+        credentials: 'same-origin',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/deleteuser',
+        method: 'POST',
+        success: (e) => {
+            console.log(e);
+            location.reload();
+        },
+        error: (e) => {
+            console.log(e);
+        }
+
+    })
+});
 
 $('body').on('click', '.btn_form_addproduct', (e) => {
 
@@ -187,7 +222,6 @@ $('body').on('click', '.btn_form_addproduct', (e) => {
         }
     })
 });
-
 $('body').on('click', '.btn_see_product', (e) => {
     $(".div_home").hide();
     $(".div_product").show();
@@ -201,8 +235,37 @@ $('body').on('click', '.btn_see_product', (e) => {
             $("#year_product").html("Année: " + val.year);
             $("#milestone_product").html("Kilomètrage: " + val.milestone + ' km');
             $("#description_product").html("Description: " + val.description);
+            $(".div_product .btn_addcart_product").attr('id_product', val.id);
         }
     })
 
+})
+$('body').on('click', '.btn_addcart_product', (e) => {
+    var id = $(e.currentTarget).attr('id_product');
+    console.log(id);
+    $.each(products, (key, val) => {
+        if (val.id == id) {
+            cart.produts_id = cart.produts_id ? cart.produts_id + ',' + id : id;
+            cart.quantity = cart.quantity + 1;
+            cart.total_price = cart.total_price + parseInt(val.price);
+        }
+    })
+    console.log(cart);
+    $.ajax({
+        credentials: 'same-origin',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/addcart',
+        method: 'POST',
+        data: { cart },
+        success: (e) => {
+            
+            console.log(e);
+        },
+        error: (e) => {
+            console.log(e);
+        }
+    })
 })
 

@@ -163,6 +163,7 @@ h1 {
     font-size: 2vw;
 }
 
+.btn_delete_profile,
 .btn_addcart_product,
 .btn_addcart_product,
 .btn_see_product,
@@ -188,6 +189,11 @@ h1 {
     font-size: 1vw;
 }
 
+.btn_delete_profile:hover,
+.btn_form_addproduct:hover,
+.btn_form_edit_profile:hover,
+.btn_show_edit_profile:hover,
+.btn_form_auth:hover,
 .btn_addcart_product:hover,
 .btn_see_product:hover {
     color: black;

@@ -34,6 +34,7 @@
                 </div>
                 <div class="div_flex" style="margin-top: 25px">
                     <input class="btn_show_edit_profile" type="button" value="Modifier le profil">
+                    <input class="btn_delete_profile" style="background-color: red" type="button" value="Supprimer le compte">
                 </div>
             </div>
         </div>

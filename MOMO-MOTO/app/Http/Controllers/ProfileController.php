@@ -15,7 +15,6 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request){
-
         DB::table('users')->where('id', Auth::user()->id)->update([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -23,7 +22,12 @@ class ProfileController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+    }
 
+    public function delete(){
+        DB::table('users')->where('id', Auth::user()->id)->delete();
+        DB::table('carts')->where('user_id', Auth::user()->id)->delete();
+        Auth::logout();
     }
    
 }
