@@ -5,7 +5,7 @@ window.$ = jQuery;
 var user,
     url = location.pathname.slice(-1) == '/' ? location.pathname.slice(0, -1) : location.pathname,
     products,
-    cart ;
+    cart;
 
 console.log(url);
 
@@ -40,6 +40,7 @@ function init() {
         success: (e) => {
             cart = e[0];
             console.log(cart);
+            $("#cart_quantity").html(cart.quantity ? cart.quantity : 0);
         },
         error: (e) => {
             console.log(e);
@@ -62,8 +63,8 @@ function init() {
                         $('<img>').addClass('img_product').attr('src', "images/moto.png"),
                         $('<div/>').addClass('box_info_product').append($('<label>').addClass('label_info_product').html(val.mark + ' ' + val.model)),
                         $('<div/>').addClass('box_info_product').append($('<label>').addClass('span_info_product').html(val.price + ' €')),
-                        $('<div/>').addClass('box_info_product').append($('<input>').attr({'class':'btn_addcart_product','id_product':val.id,'type':'button', 'value':'Ajouter au panier'})),
-                        $('<div/>').addClass('box_info_product').append($('<input>').attr({'class':'btn_see_product','type':'button', 'value':'Voir la moto'})),
+                        $('<div/>').addClass('box_info_product').append($('<input>').attr({ 'class': 'btn_addcart_product', 'id_product': val.id, 'type': 'button', 'value': 'Ajouter au panier' })),
+                        $('<div/>').addClass('box_info_product').append($('<input>').attr({ 'class': 'btn_see_product', 'type': 'button', 'value': 'Voir la moto' })),
                     )
                 )
             })
@@ -110,8 +111,10 @@ $('body').on('click', '#logo_navbar', (e) => { $('.div_navbar').toggle(); })
 $('body').on('click', '#btn_page_profile', (e) => { location.href = '/profile'; })
 $('body').on('click', '#btn_page_home', (e) => { location.href = '/home'; })
 $('body').on('click', '#btn_page_addproduct', (e) => { location.href = '/addproduct'; })
+$('body').on('click', '#logo_cart', (e) => { location.href = '/cart'; })
+$('body').on('click', '#btn_page_cart', (e) => { location.href = '/cart'; })
 $('body').on('click', '.btn_show_edit_profile', (e) => { $(".div_info_profile").hide(); $(".div_edit_profile").show(); })
-$('body').on('click', '#arrow_back', (e)=> { $(".div_home").show(); $(".div_product").hide(); })
+$('body').on('click', '#arrow_back', (e) => { $(".div_home").show(); $(".div_product").hide(); })
 $('body').on('click', '.input_img_form_addproduct', (e) => { $(e.currentTarget).val() })
 $('body').on('click', '#btn_logout', (e) => {
     $.ajax({
@@ -242,14 +245,14 @@ $('body').on('click', '.btn_see_product', (e) => {
 })
 $('body').on('click', '.btn_addcart_product', (e) => {
     var id = $(e.currentTarget).attr('id_product');
-    console.log(id);
     $.each(products, (key, val) => {
         if (val.id == id) {
-            cart.produts_id = cart.produts_id ? cart.produts_id + ',' + id : id;
+            cart.products_id = cart.products_id ? cart.products_id + ',' + id : id.toString();
             cart.quantity = cart.quantity + 1;
             cart.total_price = cart.total_price + parseInt(val.price);
         }
     })
+    console.log(cart.products_id);
     console.log(cart);
     $.ajax({
         credentials: 'same-origin',
@@ -260,7 +263,6 @@ $('body').on('click', '.btn_addcart_product', (e) => {
         method: 'POST',
         data: { cart },
         success: (e) => {
-            
             console.log(e);
         },
         error: (e) => {
@@ -268,4 +270,3 @@ $('body').on('click', '.btn_addcart_product', (e) => {
         }
     })
 })
-

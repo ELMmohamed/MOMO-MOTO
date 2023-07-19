@@ -23,11 +23,11 @@ class CartController extends Controller
 
     public function add_cart (Request $request)
     {
-        return $request;
         DB::table('carts')->where('user_id', Auth::user()->id)->update([
-            'products_id' => $request->products_id,
-            'quantity' => $request->quantity,
-            'total_price' => $request->total_price,
+            'products_id' => $request->cart["products_id"],
+            'quantity' => $request->cart["quantity"],
+            'total_price' => $request->cart["total_price"],
         ]);
+
     }
 }

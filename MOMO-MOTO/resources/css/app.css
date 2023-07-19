@@ -98,6 +98,7 @@ h1 {
 }
 
 .div_home,
+.div_cart,
 .div_product,
 .div_addproduct,
 .div_form_auth,
@@ -244,4 +245,35 @@ p {
     top: 30px;
     width: 2vw;
     cursor: pointer;
+}
+
+.box_cart {
+    width: 90%;
+    height: 80%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.div_product_in_cart{
+    
+}
+
+.div_cart_quantity{
+    opacity: 0.8;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #004aad;
+    width: 1vw;
+    height: 1vw;
+    position: absolute;
+    right: 8px;
+    top: -5px;
+}
+
+#cart_quantity{
+    color: white;
+    font-size: 0.8vw;
 }
