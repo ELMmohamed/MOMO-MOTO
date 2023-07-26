@@ -71,6 +71,7 @@ h1 {
 }
 
 .div_navbar {
+    z-index: 1000;
     display: none;
     background-color: white;
     position: absolute;
@@ -148,6 +149,7 @@ h1 {
     border-radius: 12px;
 }
 
+.input_adress_user,
 .input_form_addproduct,
 .input_form_edit_profile,
 .input_form_auth {
@@ -164,6 +166,7 @@ h1 {
     font-size: 2vw;
 }
 
+.btn_validate_cart,
 .btn_delete_profile,
 .btn_addcart_product,
 .btn_addcart_product,
@@ -256,7 +259,24 @@ p {
 }
 
 .div_product_in_cart{
-    
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: #004aad 2px solid;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+.div_info_cart{ 
+    padding: 10px;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .div_cart_quantity{
@@ -277,3 +297,26 @@ p {
     color: white;
     font-size: 0.8vw;
 }
+
+.box_product_in_cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40vw;
+    height: 10vh;
+    padding: 10px;
+    border-bottom: #004aad 2px solid;
+}
+
+.img_product_in_cart {
+    width: 125px;
+    border-radius: 12px;
+}
+
+.box_product_in_cart label{
+    font-size: 1vw;
+    margin-left: 10px;
+}
+
+
+

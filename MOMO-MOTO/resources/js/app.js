@@ -41,6 +41,12 @@ function init() {
             cart = e[0];
             console.log(cart);
             $("#cart_quantity").html(cart.quantity ? cart.quantity : 0);
+            if (url == '/cart') {
+                $(".div_total_cart").append(
+                    $("h2").addClass('total_cart').html('Total à payer:'),
+                    $("h2").addClass('total_cart').html(cart.total_price + ' € dont ' + (cart.total_price * 0.2).toFixed(2) + ' € de TVA'),
+                )
+            }
         },
         error: (e) => {
             console.log(e);
@@ -58,21 +64,33 @@ function init() {
             console.log(e);
             products = e;
             $.each(e, (key, val) => {
-                $(".box_products").append(
-                    $('<div/>').attr({ "class": 'box_product', "id": "product_" + val.id }).append(
-                        $('<img>').addClass('img_product').attr('src', "images/moto.png"),
-                        $('<div/>').addClass('box_info_product').append($('<label>').addClass('label_info_product').html(val.mark + ' ' + val.model)),
-                        $('<div/>').addClass('box_info_product').append($('<label>').addClass('span_info_product').html(val.price + ' €')),
-                        $('<div/>').addClass('box_info_product').append($('<input>').attr({ 'class': 'btn_addcart_product', 'id_product': val.id, 'type': 'button', 'value': 'Ajouter au panier' })),
-                        $('<div/>').addClass('box_info_product').append($('<input>').attr({ 'class': 'btn_see_product', 'type': 'button', 'value': 'Voir la moto' })),
+                if (!cart.products_id.split(',').includes(val.id.toString())) {
+                    $(".box_products").append(
+                        $('<div/>').attr({ "class": 'box_product', "id": "product_" + val.id }).append(
+                            $('<img>').addClass('img_product').attr('src', "images/moto.png"),
+                            $('<div/>').addClass('box_info_product').append($('<label>').addClass('label_info_product').html(val.mark + ' ' + val.model)),
+                            $('<div/>').addClass('box_info_product').append($('<label>').addClass('span_info_product').html(val.price + ' €')),
+                            $('<div/>').addClass('box_info_product').append($('<input>').attr({ 'class': 'btn_addcart_product', 'id_product': val.id, 'type': 'button', 'value': 'Ajouter au panier' })),
+                            $('<div/>').addClass('box_info_product').append($('<input>').attr({ 'class': 'btn_see_product', 'type': 'button', 'value': 'Voir la moto' })),
+                        )
                     )
-                )
+                } else {
+                    $(".div_product_in_cart").append(
+                        $('<div/>').attr({ "class": 'box_product_in_cart', "id": "product_" + val.id }).append(
+                            $('<img>').addClass('img_product_in_cart').attr('src', "images/moto.png"),
+                            $('<div/>').addClass('box_info_product_in_cart').append($('<label>').addClass('label_info_product_in_cart').html(val.mark + ' ' + val.model)),
+                            $('<div/>').addClass('box_info_product_in_cart').append($('<label>').addClass('span_info_product_in_cart').html(val.price + ' €')),
+                            $('<img>').addClass('img_delete_product_in_cart').attr('src', "images/delete.svg"),
+                        )
+                    )
+                }
             })
         },
         error: (e) => {
             console.log(e);
         }
     })
+
 }
 
 if (url != '' && url != '/register')
@@ -264,6 +282,8 @@ $('body').on('click', '.btn_addcart_product', (e) => {
         data: { cart },
         success: (e) => {
             console.log(e);
+            $("#cart_quantity").html(cart.quantity);
+            $("#id_product_" + id).remove();
         },
         error: (e) => {
             console.log(e);
